@@ -1,0 +1,47 @@
+import os
+
+
+def move():
+    mv = input("What side of light do you want to go? (north, east, south, west)")
+    if mv == "north":
+        return (0,-1)
+    elif mv == "east":
+        return (+1,0)
+    elif mv == "south":
+        return (0,+1)
+    elif mv == "west":
+        return (-1,0)
+    else: print("Wrong Command")
+    
+map=[['w','w','w','w','w','w'],
+     [' ',' ',' ',' ','w','w'],
+     [' ',' ',' ','w',' ',' '],
+     [' ',' ',' ','w',' ',' '],
+     [' ',' ',' ',' ',' ',' ']] 
+
+
+def render(xchar, ychar):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    for x in range(0,5):
+        for y in range(0,6):
+            if y == ychar and x == xchar:
+                print("웃", end="")
+            else: print(map[x][y], end="")
+        print('')
+
+    
+    
+i,x,y = 0,0,0
+wall,char ="$","웃"   
+xchar,ychar = 8,4
+xborder, yborder = 16,8
+while True:
+    render(xchar,ychar)
+        
+    d = move()
+    wb = wallbang(xborder,yborder,xchar+ d[0],ychar + d[1])
+    if wb == True:
+        xchar = xchar+d[0]
+        ychar = ychar+d[1]  
+    print(d)
+    
